@@ -12,7 +12,6 @@ import com.paulniu.library.callbacks.IListDialogSelectCallback;
 import com.paulniu.library.callbacks.IThreeBtnDialogClickCallback;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
