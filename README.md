@@ -5,7 +5,7 @@
 
 ## 原生dialog
 
-原生dialog实现了单个按钮弹窗，两个按钮弹窗，三个按钮弹窗，列表弹窗，单选列表弹窗和多选列表弹窗
+原生dialog实现了单个按钮弹窗，两个按钮弹窗，三个按钮弹窗，列表弹窗，单选列表弹窗,多选列表弹窗,加载中弹窗
 所有的原生dialog都可以直接调用GeneralDialog中的静态方法，传入相应的数据即可
 
 ### 单个按钮弹窗
@@ -103,5 +103,19 @@
                         Toast.makeText(MainActivity.this, "你选择的有一下几个对象：" + ss, Toast.LENGTH_SHORT).show();
                     }
                 });
+
+```
+
+### 加载中弹窗
+```java
+                final ProgressDialog dialog = GeneralDialog.dialogProgress(MainActivity.this,"加载中弹窗","加载中");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (dialog != null){
+                            dialog.dismiss();
+                        }
+                    }
+                },3000);
 
 ```
