@@ -24,6 +24,43 @@ import java.util.List;
 public class GeneralDialog {
 
     /**
+     * 单个按钮弹出框
+     * @param context
+     * @param title
+     * @param message
+     * @param callback
+     */
+    public static void dialogWithOneBtn(Context context,String title,String message,IBaseDialogClickCallback callback){
+        dialogWithOneBtn(context,title,message,"确定",true,callback);
+    }
+
+    /**
+     * 单个按钮弹出框
+     * @param context
+     * @param title
+     * @param message
+     * @param strPositive
+     * @param isCancelable
+     * @param callback
+     */
+    public static void dialogWithOneBtn(Context context,String title,String message,String strPositive,boolean isCancelable,final IBaseDialogClickCallback callback){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setCancelable(isCancelable);
+        builder.setPositiveButton(strPositive, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (null != callback){
+                    callback.onClickPositive();
+                }
+                dialogInterface.dismiss();
+            }
+        });
+        builder.create().show();
+    }
+
+    /**
      * 带有两个按钮的弹出框
      *
      * @param context

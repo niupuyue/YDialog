@@ -8,6 +8,12 @@
     tools:context=".MainActivity">
 
     <Button
+        android:id="@+id/btn00"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="单个按钮弹出框" />
+
+    <Button
         android:id="@+id/btn01"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

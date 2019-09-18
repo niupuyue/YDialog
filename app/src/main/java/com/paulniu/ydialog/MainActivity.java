@@ -17,12 +17,30 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btn01, btn02, btn03, btn04, btn05;
+    private Button btn00, btn01, btn02, btn03, btn04, btn05;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        btn00 = findViewById(R.id.btn00);
+        btn00.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GeneralDialog.dialogWithOneBtn(MainActivity.this, "单个按钮", "单个按钮弹窗", new IBaseDialogClickCallback() {
+                    @Override
+                    public void onClickPositive() {
+                        Toast.makeText(MainActivity.this, "点击确认按钮", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onClickNegative() {
+
+                    }
+                });
+            }
+        });
+
         btn01 = findViewById(R.id.btn01);
         btn01.setOnClickListener(new View.OnClickListener() {
             @Override
