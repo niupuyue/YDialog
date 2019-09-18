@@ -2,7 +2,9 @@ package com.paulniu.ydialog;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -17,7 +19,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btn00, btn01, btn02, btn03, btn04, btn05;
+    private Button btn00, btn01, btn02, btn03, btn04, btn05,btn06;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,6 +131,22 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "你选择的有一下几个对象：" + ss, Toast.LENGTH_SHORT).show();
                     }
                 });
+            }
+        });
+
+        btn06 = findViewById(R.id.btn06);
+        btn06.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final ProgressDialog dialog = GeneralDialog.dialogProgress(MainActivity.this,"加载中弹窗","加载中");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (dialog != null){
+                            dialog.dismiss();
+                        }
+                    }
+                },3000);
             }
         });
     }

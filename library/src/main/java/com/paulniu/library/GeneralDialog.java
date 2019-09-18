@@ -25,17 +25,19 @@ public class GeneralDialog {
 
     /**
      * 单个按钮弹出框
+     *
      * @param context
      * @param title
      * @param message
      * @param callback
      */
-    public static void dialogWithOneBtn(Context context,String title,String message,IBaseDialogClickCallback callback){
-        dialogWithOneBtn(context,title,message,"确定",true,callback);
+    public static void dialogWithOneBtn(Context context, String title, String message, IBaseDialogClickCallback callback) {
+        dialogWithOneBtn(context, title, message, "确定", true, callback);
     }
 
     /**
      * 单个按钮弹出框
+     *
      * @param context
      * @param title
      * @param message
@@ -43,7 +45,7 @@ public class GeneralDialog {
      * @param isCancelable
      * @param callback
      */
-    public static void dialogWithOneBtn(Context context,String title,String message,String strPositive,boolean isCancelable,final IBaseDialogClickCallback callback){
+    public static void dialogWithOneBtn(Context context, String title, String message, String strPositive, boolean isCancelable, final IBaseDialogClickCallback callback) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(title);
         builder.setMessage(message);
@@ -51,7 +53,7 @@ public class GeneralDialog {
         builder.setPositiveButton(strPositive, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if (null != callback){
+                if (null != callback) {
                     callback.onClickPositive();
                 }
                 dialogInterface.dismiss();
@@ -227,8 +229,10 @@ public class GeneralDialog {
      * @param callback
      */
     public static void dialogSingleSelect(Context context, String title, String[] items, IListDialogSelectCallback callback) {
-        dialogSingleSelect(context, title, items, false, callback);
+        dialogSingleSelect(context, title, items, 0, false, callback);
     }
+
+    private static int selectPosition;
 
     /**
      * 单选列表弹窗
@@ -239,7 +243,7 @@ public class GeneralDialog {
      * @param callback
      */
     public static void dialogSingleSelect(Context context, String title, List<String> items, IListDialogSelectCallback callback) {
-        dialogSingleSelect(context, title, (String[]) items.toArray(), false, callback);
+        dialogSingleSelect(context, title, (String[]) items.toArray(), 0, false, callback);
     }
 
     /**
@@ -251,18 +255,30 @@ public class GeneralDialog {
      * @param isCancelable
      * @param callback
      */
-    public static void dialogSingleSelect(Context context, String title, String[] items, boolean isCancelable, final IListDialogSelectCallback callback) {
+    public static void dialogSingleSelect(Context context, String title, String[] items, int selected, boolean isCancelable, final IListDialogSelectCallback callback) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(title);
         builder.setCancelable(isCancelable);
-        builder.setItems(items, new DialogInterface.OnClickListener() {
+        builder.setSingleChoiceItems(items, selected, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int position) {
+                selectPosition = position;
+            }
+        });
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
                 if (null != callback) {
                     List<Integer> res = new ArrayList<>();
-                    res.add(position);
+                    res.add(selectPosition);
                     callback.onListDialogClick(res);
                 }
+                dialogInterface.dismiss();
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
             }
         });
@@ -350,13 +366,22 @@ public class GeneralDialog {
 
     public static final int MAX_VALUE = 100;
 
-    public static void dialogProgress(Context context, String title) {
-        final ProgressDialog dialog = new ProgressDialog(context);
-        dialog.setProgress(0);
-        dialog.setTitle("带有加载进度dialog");
-        dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        dialog.setMax(MAX_VALUE);
-        dialog.show();
+    /**
+     * 加载中的弹窗
+     * @param context
+     * @param title
+     * @param message
+     * @return
+     */
+    public static ProgressDialog dialogProgress(Context context, String title, String message) {
+        final int MAX = 100;
+        final ProgressDialog progressDialog = new ProgressDialog(context);
+        progressDialog.setTitle(title);
+        progressDialog.setMessage(message);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        return progressDialog;
     }
 
 }
