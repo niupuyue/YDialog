@@ -32,7 +32,7 @@ public class GeneralDialog {
      * @param callback
      */
     public static void dialogWithOneBtn(Context context, String title, String message, IBaseDialogClickCallback callback) {
-        dialogWithOneBtn(context, title, message, "确定", true, callback);
+        dialogWithOneBtn(context, title, message, context.getString(R.string.app_confirm), true, callback);
     }
 
     /**
@@ -71,7 +71,7 @@ public class GeneralDialog {
      * @param callback
      */
     public static void dialogWithTwoBtn(Context context, String title, String message, IBaseDialogClickCallback callback) {
-        dialogWithTwoBtn(context, title, message, "确定", "取消", true, callback);
+        dialogWithTwoBtn(context, title, message, context.getString(R.string.app_confirm), context.getString(R.string.app_cancel), true, callback);
     }
 
     /**
@@ -121,7 +121,7 @@ public class GeneralDialog {
      * @param callback
      */
     public static void dialogWithThreeBtn(Context context, String title, String message, String strNeutral, IThreeBtnDialogClickCallback callback) {
-        dialogWithThreeBtn(context, title, message, "确定", "取消", strNeutral, true, callback);
+        dialogWithThreeBtn(context, title, message, context.getString(R.string.app_confirm), context.getString(R.string.app_cancel), strNeutral, true, callback);
     }
 
     /**
@@ -265,7 +265,7 @@ public class GeneralDialog {
                 selectPosition = position;
             }
         });
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(context.getString(R.string.app_confirm), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (null != callback) {
@@ -276,7 +276,7 @@ public class GeneralDialog {
                 dialogInterface.dismiss();
             }
         });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(context.getString(R.string.app_cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
@@ -346,7 +346,7 @@ public class GeneralDialog {
                 }
             }
         });
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(context.getString(R.string.app_confirm), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (null != callback) {
@@ -355,7 +355,7 @@ public class GeneralDialog {
                 dialogInterface.dismiss();
             }
         });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(context.getString(R.string.app_cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
